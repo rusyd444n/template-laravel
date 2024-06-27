@@ -110,7 +110,7 @@
                   </div>
                   <div class="col-12">
                     <div class="text-start">
-                      <p class="mb-0">Don't have an account yet? <a href="auth-cover-register.html">Sign up here</a>
+                      <p class="mb-0">Don't have an account yet? <a href="{{route('register')}}">Sign up here</a>
                       </p>
                     </div>
                   </div>

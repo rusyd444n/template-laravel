@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\http\controllers\FrontController;
+use App\http\Middleware\IsAdmin;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -14,7 +15,7 @@ use App\http\controllers\FrontController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('index');
 });
 
 Auth::routes();
@@ -27,12 +28,14 @@ Auth::routes();
  });
 
 // route admin
-Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
+Route::group(['prefix' => 'admin', 'middleware' => ['auth', IsAdmin::class]], function () {
     route::get('/',function (){
         return view('admin.index');
     });
+    //bekend lainnya
+    Route::resource('user', App\Http\Controllers\UsersController::class);
 });
-// untuk route lainnya slebew:)
+// untuk route backend  slebew:)
 Route::get('indeks',[FrontController::class,'index']);
 Route::get('contact',[FrontController::class,'contact']);
 Route::get('shop',[FrontController::class,'shop']);
